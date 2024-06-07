@@ -1,10 +1,12 @@
+import torch
+
 from unet.unet_blocks import *
 
 
 class DDPMUNet(nn.Module):
-    def __init__(self, in_channels, out_channels, t_channels):
+    def __init__(self, in_channels, out_channels, t_channels, device):
         super().__init__()
-        self.time_embedding = TimeEmbedding(t_channels)
+        self.time_embedding = TimeEmbedding(t_channels, device)
         self.in_conv = Conv(in_channels, 64)
         self.down1 = Down(64, 64, t_channels)
         self.down_sample1 = Downsample(64)
