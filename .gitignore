@@ -1,5 +1,6 @@
 .idea
 data/animefacedataset/
 unet/__pycache__/
+__pycache__/
 data/train-index.json
 data/val-index.json

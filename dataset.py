@@ -24,7 +24,7 @@ class AnimeFaceDataset(Dataset):
         file_path = os.path.join(self.dataset_root, 'images', self.index_data[index]['file'])
         img = read_image(file_path)
         img = (img - 127.5) / 127.5
-        img = TF.resize(img, [128, 128])
+        img = TF.resize(img, [self.resize, self.resize], antialias=True)
         return img
 
     def __len__(self):
