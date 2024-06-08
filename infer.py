@@ -49,8 +49,6 @@ def main():
 
         x = torch.randn([batch_size, 3, args.height, args.width], device=device)
         for t in range(args.max_time_step, 0, -1):
-            if t == 996:
-                save_image(x[0,:,:,:], './test.png')
             with torch.no_grad():
                 beta = betas[t-1]
                 alpha = alphas[t-1]
