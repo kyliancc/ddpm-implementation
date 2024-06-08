@@ -1,5 +1,3 @@
-import torch
-
 from unet.unet_blocks import *
 
 
