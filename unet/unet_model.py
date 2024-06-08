@@ -2,7 +2,7 @@ from unet.unet_blocks import *
 
 
 class DDPMUNet(nn.Module):
-    def __init__(self, in_channels, out_channels, t_channels, device):
+    def __init__(self, device, in_channels=3, out_channels=3, t_channels=128):
         super().__init__()
         self.time_embedding = TimeEmbedding(t_channels, device)
         self.in_conv = Conv(in_channels, 64)

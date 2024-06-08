@@ -46,7 +46,7 @@ def main():
 
     print('START TRAINING')
 
-    betas = torch.linspace(1e-4, 0.02, args.max_time_step - 1, device=device)
+    betas = torch.linspace(1e-4, 0.02, args.max_time_step, device=device)
     alphas = 1 - betas
     alphas_bar = torch.cumprod(alphas, dim=0)
 
@@ -57,7 +57,7 @@ def main():
 
             img = img.to(device)
 
-            time_step = torch.randint(1, args.max_time_step, [img.size(0),], device=device)
+            time_step = torch.randint(1, args.max_time_step + 1, [img.size(0),], device=device)
             noise = torch.randn_like(img, device=device)
 
             mean = img * torch.reshape(torch.sqrt(alphas_bar[time_step-1]), [-1, 1, 1, 1])
