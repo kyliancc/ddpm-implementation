@@ -20,6 +20,8 @@ val_data = [{'file': val_imgs[i]} for i in range(nvals)]
 train_json = json.dumps(train_data, sort_keys=True, indent=4, separators=(', ', ': '))
 with open('./train-index.json', 'w') as f:
     f.write(train_json)
+    print('Saved train-index.json.')
 val_json = json.dumps(val_data, sort_keys=True, indent=4, separators=(', ', ': '))
 with open('./val-index.json', 'w') as f:
     f.write(val_json)
+    print('Saved val-index.json.')
