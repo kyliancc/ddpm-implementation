@@ -32,8 +32,8 @@ class DDPMUNet(nn.Module):
         x31, x32, x33 = self.down3(self.down_sample2(x23), t)
         x41, x42, x43 = self.down4(self.down_sample3(x33), t)
         x = self.up4(self.mid(x43, t), x41, x42, x43, t)
-        x = self.up3(self.up_sample3(x, t), x31, x32, x33, t)
-        x = self.up2(self.up_sample2(x, t), x21, x22, x23, t)
-        x = self.up1(self.up_sample1(x, t), x11, x12, x13, t)
+        x = self.up3(self.up_sample3(x), x31, x32, x33, t)
+        x = self.up2(self.up_sample2(x), x21, x22, x23, t)
+        x = self.up1(self.up_sample1(x), x11, x12, x13, t)
         x = self.out_conv(x)
         return x

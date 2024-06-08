@@ -118,7 +118,7 @@ class Upsample(nn.Module):
         :param x: Input feature maps with size [batch_size, n_channels, height, width].
         :return: Output feature maps with size [batch_size, n_channels, height, width].
         """
-        return self.down(x)
+        return self.up(x)
 
 
 class DownBlock(nn.Module):
