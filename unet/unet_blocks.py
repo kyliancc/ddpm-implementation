@@ -6,10 +6,9 @@ import math
 
 
 class TimeEmbedding(nn.Module):
-    def __init__(self, t_channels, device):
+    def __init__(self, t_channels):
         super().__init__()
         self.t_channels = t_channels
-        self.device = device
 
     def forward(self, time_step):
         """
@@ -18,8 +17,8 @@ class TimeEmbedding(nn.Module):
         """
         time_step.unsqueeze_(-1)
         frac_len = math.ceil(self.t_channels / 2)
-        frac = time_step / (torch.pow(10000, torch.arange(0, frac_len, 1, device=self.device) / self.t_channels))
-        ret = torch.zeros([time_step.size(0), self.t_channels], device=self.device)
+        frac = time_step / (torch.pow(10000, torch.arange(0, frac_len, 1, device=time_step.device) / self.t_channels))
+        ret = torch.zeros([time_step.size(0), self.t_channels], device=time_step.device)
         ret[:, 0::2] = torch.sin(frac)
         ret[:, 1::2] = torch.cos(frac)
         return ret

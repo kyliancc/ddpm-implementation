@@ -29,7 +29,7 @@ def main():
 
     current_time = datetime.now().strftime('%Y%m%d-%H%M%S')
 
-    model = DDPMUNet(in_channels=3, out_channels=3, t_channels=128, device=device)
+    model = DDPMUNet(in_channels=3, out_channels=3, t_channels=128)
     model.to(device)
     state_dict = torch.load(args.load)['model']
     model.load_state_dict(state_dict)
@@ -55,7 +55,7 @@ def main():
                 alpha_bar = alphas_bar[t-1]
 
                 pred = model(x, torch.full([batch_size,], t, device=device))
-                x_next = (1 / torch.sqrt(alpha_bar)) * (x - pred * ((1 - alpha) / torch.sqrt(1 - alpha_bar)))
+                x_next = (1 / torch.sqrt(alpha)) * (x - pred * ((1 - alpha) / torch.sqrt(1 - alpha_bar)))
 
                 if t > 1:
                     z = torch.randn_like(x, device=device)

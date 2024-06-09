@@ -31,7 +31,7 @@ def main():
     train_dataset = AnimeFaceDataset('train', resize=96)
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers)
 
-    model = DDPMUNet(in_channels=3, out_channels=3, t_channels=128, device=device)
+    model = DDPMUNet(in_channels=3, out_channels=3, t_channels=128)
     model.to(device)
     criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
