@@ -2,7 +2,8 @@
 
 My DDPM (Denoising Diffusion Probabilistic Model) implementation using PyTorch.
 
-This project is developing... Just wait for that. 🤫
+> **WARN:**
+> This project is still developing... Just wait for that. 🤫
 
 ---
 
@@ -11,6 +12,19 @@ Original research paper: https://arxiv.org/pdf/2006.11239 (_Denoising Diffusion 
 Dataset from kaggle: https://www.kaggle.com/datasets/splcher/animefacedataset
 
 ---
+
+### About My Repository Branches:
+
+**main**: My DDPM implementation, of course.
+
+**experiment**: A smaller experiment of DDPM.
+I changed the model architecture and hyperparameters, using MNIST dataset.
+
+I created `experiment` branch because my DDPM got some problem on training.
+Like my computer almost cannot hold on this DDPM model, I only can train it with `batch_size=1` XD.
+And I trained it for many iterations but generated images are all blank.
+So, I decided to design a smaller experiment, and try to run it successfully at first.
+
 
 ## Preparations
 
