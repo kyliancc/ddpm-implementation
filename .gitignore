@@ -1,7 +1,6 @@
 .idea
-data/animefacedataset/
+data/MNIST/
 unet/__pycache__/
 __pycache__/
-data/*.json
 checkpoints/*.pth
 out/*.png

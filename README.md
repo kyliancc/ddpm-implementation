@@ -1,4 +1,4 @@
-# DDPM Implementation
+# DDPM Implementation (Experiment Branch)
 
 My DDPM (Denoising Diffusion Probabilistic Model) implementation using PyTorch.
 
@@ -12,56 +12,22 @@ Dataset from kaggle: https://www.kaggle.com/datasets/splcher/animefacedataset
 
 ---
 
-## Preparations
+## Experiment
 
-### Download and Setup Dataset
+### Model Architecture
 
-- Run `data/download.sh`, this will download dataset from kaggle and unzip it.
-- Run `python data/index.py`, this will generate two index JSON file for training.
+![model architecture](model.jpg)
 
-Then you will see `train-index.json` and `val-index.json` appear in the `data` directory.
-They're required for training.
+The time encode, which was appeared in the second figure, is basically same to the Position Encoding in Tranformer.
 
-## Training
+### DDPM Hyperparameters
 
-### Start Training from Scratch
+In order to simplify this experiment, I set:
 
-~~~
-python train.py
-~~~
+Max time step `T = 100`.
 
-Checkpoints will be saved in `checkpoints` directory.
+Beta_t increasing linearly from `beta_1 = 1e-3` to `beta = 0.15`.
 
-**Arguments of train.py:**
-- `-b`, ( _int_ ) Batch size.
-- `-l`, (_float_) Learning rate.
-- `-e`, ( _int_ ) Epochs to train.
-- `-w`, ( _int_ ) How many dataloader workers.
-- `-f`, ( _str_ ) Path to checkpoint.
-- `-s`, ( _int_ ) How many iterations to save.
-- `-t`, ( _int_ ) How many time steps of Markov chain.
+### Dataset
 
-### Continue Training
-
-~~~
-python train.py -f ./checkpoints/your-checkpoint.pth
-~~~
-
-## Inference
-
-### Start Inference
-
-~~~
-python infer.py -f ./checkpoints/your-checkpoint.pth
-~~~
-
-Generated images will be saved in `out` directory by default.
-
-**Arguments of infer.py:**
-- `-f`, ( _str_ ) Path to checkpoint.
-- `-o`, ( _str_ ) Output directory.
-- `-b`, ( _int_ ) Batch size.
-- `-n`, ( _int_ ) How many images to generate.
-- `-x`, ( _int_ ) Width of generated image.
-- `-y`, ( _int_ ) Height of generated image.
-- `-t`, ( _int_ ) How many time steps of Markov chain.
+I use MNIST dataset to train my model.

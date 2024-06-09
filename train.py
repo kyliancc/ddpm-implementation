@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
+import torchvision
+from torchvision.datasets import MNIST
 
 import argparse
 
@@ -17,7 +19,7 @@ def parse_arguments():
     parser.add_argument('--num_workers', '-w', type=int, default=4, help='how many dataloader workers')
     parser.add_argument('--load', '-f', type=str, default=None, help='path to checkpoint')
     parser.add_argument('--save', '-s', type=int, default=200, help='how many iterations to save')
-    parser.add_argument('--max_time_step', '-t', type=int, default=1000, help='how many time steps of Markov chain')
+    parser.add_argument('--max_time_step', '-t', type=int, default=100, help='how many time steps of Markov chain')
     return parser.parse_args()
 
 
@@ -28,7 +30,12 @@ def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f'Device: {device}')
 
-    train_dataset = AnimeFaceDataset('train', resize=96)
+    transform = torchvision.transforms.Compose([
+        torchvision.transforms.ToTensor(),
+        torchvision.transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+    ])
+
+    train_dataset = MNIST(root='./data', train=True, transform=transform)
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers)
 
     model = DDPMUNet(in_channels=3, out_channels=3, t_channels=128, device=device)
