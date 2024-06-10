@@ -6,13 +6,13 @@ from torch.utils.data import DataLoader
 import argparse
 
 from dataset import AnimeFaceDataset
-from unet import DDPMUNet
+from unet2 import UNet
 
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--batch_size', '-b', type=int, default=4, help='batch size')
-    parser.add_argument('--lr', '-l', type=float, default=1e-4, help='learning rate')
+    parser.add_argument('--batch_size', '-b', type=int, default=16, help='batch size')
+    parser.add_argument('--lr', '-l', type=float, default=2e-5, help='learning rate')
     parser.add_argument('--epochs', '-e', type=int, default=1, help='epochs to train')
     parser.add_argument('--num_workers', '-w', type=int, default=4, help='how many dataloader workers')
     parser.add_argument('--load', '-f', type=str, default=None, help='path to checkpoint')
@@ -31,7 +31,7 @@ def main():
     train_dataset = AnimeFaceDataset('train', resize=96)
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers)
 
-    model = DDPMUNet(in_channels=3, out_channels=3, t_channels=128)
+    model = UNet()
     model.to(device)
     criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
@@ -79,8 +79,8 @@ def main():
                     'model': model.state_dict(),
                     'optimizer': optimizer.state_dict()
                 }
-                torch.save(state_dict, f'./checkpoints/ddpm-unet-{iterations}.pth')
-                print(f'Checkpoint saved to ./checkpoints/ddpm-unet-{iterations}.pth')
+                torch.save(state_dict, f'./checkpoints/unet-{iterations}.pth')
+                print(f'Checkpoint saved to ./checkpoints/unet-{iterations}.pth')
 
 
 if __name__ == '__main__':

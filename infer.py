@@ -5,7 +5,7 @@ import argparse
 from datetime import datetime
 import os
 
-from unet import DDPMUNet
+from unet2 import UNet
 
 
 def parse_arguments():
@@ -29,7 +29,7 @@ def main():
 
     current_time = datetime.now().strftime('%Y%m%d-%H%M%S')
 
-    model = DDPMUNet(in_channels=3, out_channels=3, t_channels=128)
+    model = UNet()
     model.to(device)
     state_dict = torch.load(args.load)['model']
     model.load_state_dict(state_dict)
