@@ -13,7 +13,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('--batch_size', '-b', type=int, default=16, help='batch size')
     parser.add_argument('--lr', '-l', type=float, default=2e-5, help='learning rate')
-    parser.add_argument('--epochs', '-e', type=int, default=1, help='epochs to train')
+    parser.add_argument('--epochs', '-e', type=int, default=5, help='epochs to train')
     parser.add_argument('--num_workers', '-w', type=int, default=4, help='how many dataloader workers')
     parser.add_argument('--load', '-f', type=str, default=None, help='path to checkpoint')
     parser.add_argument('--save', '-s', type=int, default=200, help='how many iterations to save')

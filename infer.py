@@ -12,7 +12,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('--load', '-f', type=str, default=None, help='path to checkpoint', required=True)
     parser.add_argument('--output', '-o', type=str, default='./out/', help='output directory')
-    parser.add_argument('--batch_size', '-b', type=int, default=4, help='batch size')
+    parser.add_argument('--batch_size', '-b', type=int, default=16, help='batch size')
     parser.add_argument('--number', '-n', type=int, default=4, help='how many images to generate')
     parser.add_argument('--width', '-x', type=int, default=96, help='width of generated image')
     parser.add_argument('--height', '-y', type=int, default=96, help='height of generated image')
@@ -24,15 +24,20 @@ def main():
     args = parse_arguments()
     print(f'Arguments: {args.__dict__}')
 
+    if args.number < args.batch_size:
+        args.batch_size = args.number
+
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f'Device: {device}')
 
-    current_time = datetime.now().strftime('%Y%m%d-%H%M%S')
+    current_time = datetime.now().strftime('%Y%m%d%H%M%S')
+
+    state_dict = torch.load(args.load)
+    iterations = state_dict['iterations']
 
     model = UNet()
     model.to(device)
-    state_dict = torch.load(args.load)['model']
-    model.load_state_dict(state_dict)
+    model.load_state_dict(state_dict['model'])
 
     model.eval()
 
@@ -67,7 +72,7 @@ def main():
 
         for j in range(batch_size):
             img = x[j,:,:,:]
-            save_path = os.path.join(args.output, f'{current_time}-{num}.png')
+            save_path = os.path.join(args.output, f'{current_time}-{iterations}-{num}.png')
             save_image(img, save_path)
             print(f'Image saved to {save_path}')
             num += 1

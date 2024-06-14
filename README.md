@@ -68,3 +68,12 @@ Generated images will be saved in `out` directory by default.
 - `-x`, ( _int_ ) Width of generated image.
 - `-y`, ( _int_ ) Height of generated image.
 - `-t`, ( _int_ ) How many time steps of Markov chain.
+
+## Result
+
+<span>
+    <img alt="1" src="result/20240611225954-20000-4.png">
+</span>
+<span>
+    <img alt="1" src="result/20240611230856-18000-14.png">
+</span>
