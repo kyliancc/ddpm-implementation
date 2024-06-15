@@ -10,7 +10,7 @@ Original research paper: https://arxiv.org/pdf/2006.11239 (_Denoising Diffusion 
 
 Dataset from kaggle: https://www.kaggle.com/datasets/splcher/animefacedataset
 
-UNet source code (in the `unet2` directory) from: http://nn.labml.ai/diffusion/ddpm/unet.html
+UNet source code (in the `unet2` directory) from: http://nn.labml.ai/diffusion/ddpm/unet.html (The MIT License (MIT), Copyright (c) 2020 Varuna Jayasiri)
 
 ---
 
