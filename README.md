@@ -1,9 +1,8 @@
-# DDPM Implementation
+# DDPM Implementation (~~experiment for real~~)
 
-My DDPM (Denoising Diffusion Probabilistic Model) implementation using PyTorch.
+My DDPM (Denoising Diffusion Probabilistic Model) experiment using PyTorch.
 
-> **WARN:**
-> This project is still developing... Just wait for that. 🤫
+> To be honest, I do not think I did well on this project XD. I just did an experiment but not a whole implementation.
 
 ---
 
